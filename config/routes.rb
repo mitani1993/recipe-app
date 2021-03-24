@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get 'recipes/index'
   devise_for :users
-  root to: "recipe#index"
+  root to: "recipes#index"
   resources :recipes
 end

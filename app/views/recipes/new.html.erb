@@ -1,0 +1,37 @@
+<div class="recipe-form ">
+  <h1 class="text-center">レシピを投稿する</h1>
+
+  <%= form_with model: @recipe, local: true do |f| %>
+    <%= render 'layouts/error_messages', model: f.object %>
+    <div class="form-group">
+      <label class="text-secondary">料理名</label><br>
+      <%= f.text_field :title, class: "form-control"%>
+    </div>
+
+    <div class="form-group">
+      <label class="text-secondary">画像 (3枚まで)</label><br>
+      <%= f.file_field :images, name: 'recipe[images][]', id: 'recipe-images' %>
+    </div>
+
+    <div id="new-image"></div>
+
+    <div class="form-group">
+      <label class="text-secondary">カテゴリー</label><br>
+      <%= f.collection_select(:category_id, Category.all, :id, :name, {}, {class:"category"}) %>
+    </div>
+
+    <div class="form-group">
+      <label class="text-secondary">所要時間</label><br>
+      <%= f.collection_select(:time_required_id, TimeRequired.all, :id, :name, {}, {class:"time"}) %>
+    </div>
+
+    <div class="form-group">
+      <label class="text-secondary">作り方</label><br>
+      <%= f.text_area :text, class: "form-control", id: "recipe-area" %>
+    </div>
+    
+    <div class="actions">
+      <%= f.submit "投稿", class: "btn btn-primary de-btn" %>
+    </div>
+  <% end %>
+</div>

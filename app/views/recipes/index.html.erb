@@ -1,2 +1,25 @@
-<h1>Recipes#index</h1>
-<p>Find me in app/views/recipes/index.html.erb</p>
+<%= link_to "投稿する", new_recipe_path %>
+
+<div class="recipes-index">
+  <% @recipes.each do |recipe| %>
+    <div class="recipe-contents d-flex">
+      <% if recipe.images.present? %>
+        <%= image_tag recipe.images[0], class: "index-img" %>
+      <% else %>  
+        <%= image_tag "no_image.png", class: "index-img" %>
+      <% end %>
+      <div class="recipe">
+        <div class="recipe-title">
+          <%= link_to recipe.title, recipe_path(recipe) %>
+        </div>
+        <div class="recipe-content">
+          カテゴリー: <span class="recipe-category"><%= recipe.category.name %></span>
+          所要時間: <span class="recipe-time"><%= recipe.time_required.name %></span>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <div class="painate">
+    <%= paginate @recipes %>
+  </div>
+</div>
