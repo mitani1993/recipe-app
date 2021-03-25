@@ -9,5 +9,14 @@ class Recipe < ApplicationRecord
   validates :text, presence: true
   validates :category_id, numericality: { other_than: 0 }
   validates :time_required_id, numericality: { other_than: 0 }
+  validate :image_length
+
+  private
+
+  def image_length
+    if images.length >= 4
+      errors.add(:images, "は3枚以内にしてください")
+    end
+  end
   
 end
