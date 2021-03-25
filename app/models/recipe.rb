@@ -3,6 +3,7 @@ class Recipe < ApplicationRecord
   belongs_to :user
   belongs_to :category
   belongs_to :time_required
+  has_many_attached :images
 
   validates :title, presence: true
   validates :text, presence: true
